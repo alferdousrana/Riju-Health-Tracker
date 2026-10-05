@@ -29,6 +29,7 @@
   --bg:#FFF3F7;--bg2:#FFE4EE;--card:#FFFFFF;--ink:#4A2340;--soft:#8A5B7C;--line:#F6CFE0;
   --pink:#FF5C9A;--pink-soft:#FFD1E3;--lav:#9D7CFF;--lav-soft:#E8DFFF;--mint:#2FC79C;--mint-soft:#D3F6EA;
   --butter:#FFB938;--butter-soft:#FFF0CC;--red:#F2545B;--red-soft:#FFE0E1;--shadow:0 6px 0 #F6CFE0;
+  --water:#2E9BF0;--water-2:#8ED0FF;--water-soft:#E3F3FF;--water-line:#B9DFFB;
   --font:"Baloo Da 2","Baloo 2","Nunito","Segoe UI",system-ui,sans-serif;
   --hand:"Caveat","Comic Sans MS","Segoe Print",cursive;
 }
@@ -37,12 +38,14 @@
     --bg:#241223;--bg2:#2F1830;--card:#35203A;--ink:#FCE8F2;--soft:#D3A9C4;--line:#4F2E52;
     --pink:#FF78AE;--pink-soft:#5A2A48;--lav:#B69CFF;--lav-soft:#3E3163;--mint:#4FD9B0;--mint-soft:#1F4A40;
     --butter:#FFC857;--butter-soft:#4D3D1C;--red:#FF7078;--red-soft:#512A30;--shadow:0 6px 0 #1A0C1A;
+    --water:#4FB3FF;--water-2:#2A6FA8;--water-soft:#1E2F45;--water-line:#2F527A;
   }
 }
 :root[data-theme="dark"]{
   --bg:#241223;--bg2:#2F1830;--card:#35203A;--ink:#FCE8F2;--soft:#D3A9C4;--line:#4F2E52;
   --pink:#FF78AE;--pink-soft:#5A2A48;--lav:#B69CFF;--lav-soft:#3E3163;--mint:#4FD9B0;--mint-soft:#1F4A40;
   --butter:#FFC857;--butter-soft:#4D3D1C;--red:#FF7078;--red-soft:#512A30;--shadow:0 6px 0 #1A0C1A;
+    --water:#4FB3FF;--water-2:#2A6FA8;--water-soft:#1E2F45;--water-line:#2F527A;
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:border-box}
@@ -403,6 +406,144 @@ body{overscroll-behavior-y:contain}
 }
 @media (display-mode:standalone){.installbtn{display:none}}
 
+
+/* ===== v2: motivation card ===== */
+.motiv{display:flex;align-items:flex-start;gap:12px;margin:0 0 14px;padding:14px 12px 14px 14px;border-radius:24px;background:linear-gradient(120deg,var(--pink-soft),var(--lav-soft));border:2px solid var(--card);box-shadow:var(--shadow);animation:motivIn .5s cubic-bezier(.3,1.3,.5,1)}
+.motiv-ic{flex:none;width:44px;height:44px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:1.5rem}
+.motiv p{margin:0;flex:1;min-width:0;font-size:1.08rem;font-weight:600;line-height:1.6;padding-top:2px}
+.motiv button{flex:none;width:34px;height:34px;border:none;border-radius:50%;background:var(--card);color:var(--soft);font-size:1rem;cursor:pointer}
+@keyframes motivIn{from{opacity:0;transform:translateY(-8px)}}
+
+/* ===== v2: meal sections ===== */
+.meals{display:grid;gap:12px;container-type:inline-size}
+.meal{background:var(--bg2);border:2px solid var(--line);border-radius:24px;overflow:hidden}
+.meal.open{background:color-mix(in srgb,var(--pink-soft) 40%,var(--card));border-color:var(--pink-soft)}
+.meal-h{display:flex;align-items:center;gap:8px;padding:10px}
+.meal-tg{flex:1;min-width:0;display:flex;align-items:center;gap:12px;border:none;background:none;padding:0;text-align:left;cursor:pointer}
+.meal-ic{width:48px;height:48px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;background:var(--pink-soft)}
+.meal.open .meal-ic{background:var(--card)}
+.meal-t{min-width:0}
+.meal-t b{display:block;font-size:1.15rem;font-weight:800;line-height:1.15}
+.meal-t small{display:block;color:var(--soft);font-size:.85rem}
+.meal-k{font-size:.88rem;font-weight:700;white-space:nowrap;color:var(--soft)}
+.meal-k b{font-size:1.15rem;font-weight:800;color:var(--ink)}
+.meal-k.on b{color:var(--pink)}
+.chev{flex:none;width:34px;height:34px;border:none;background:none;font-size:1.1rem;color:var(--soft);cursor:pointer;border-radius:50%;transition:transform .25s;line-height:1}
+.meal.open .chev{transform:rotate(180deg)}
+.addpill{flex:none;border:2px solid var(--pink);background:var(--card);color:var(--pink);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.85rem;cursor:pointer;white-space:nowrap}
+.addpill.big{padding:7px 18px;font-size:.95rem}
+.meal-b{padding:0 10px 10px;display:grid;gap:8px}
+.fitem{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--card);border-radius:18px;padding:8px}
+.f-thumb{width:52px;height:52px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font-size:1.7rem}
+.f-info{min-width:0}
+.f-info b{display:block;font-weight:800;line-height:1.2;overflow-wrap:anywhere}
+.f-info small{display:block;color:var(--soft);font-size:.8rem;line-height:1.3}
+.f-ctrl{display:grid;grid-template-columns:64px 104px 96px 36px;gap:6px;align-items:center}
+.f-ctrl input,.f-ctrl select{width:100%;min-width:0;border:2px solid var(--line);background:var(--bg);border-radius:12px;padding:7px 8px;outline:none}
+.f-ctrl input:focus,.f-ctrl select:focus{border-color:var(--pink)}
+.f-kc{position:relative;display:block}
+.f-kc input{padding-right:38px}
+.f-kc span{position:absolute;right:9px;top:50%;transform:translateY(-50%);font-size:.78rem;color:var(--soft);pointer-events:none}
+.fitem .x{width:36px;height:38px;border:none;border-radius:12px;background:var(--red-soft);color:var(--red);font-size:1.05rem;cursor:pointer}
+.meal-f{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:2px}
+.meal-tot{margin-left:auto;background:var(--card);border:2px solid var(--pink-soft);border-radius:16px;padding:5px 14px;color:var(--pink);font-weight:700;white-space:nowrap}
+.meal-tot b{font-size:1.25rem;font-weight:800}
+/* food picker */
+.picker{background:var(--card);border:2px dashed var(--pink);border-radius:18px;padding:10px}
+.pk-search{display:flex;align-items:center;gap:8px;background:var(--bg);border:2px solid var(--pink);border-radius:14px;padding:2px 4px 2px 10px}
+.pk-search input{flex:1;min-width:0;border:none;background:none;padding:8px 0;outline:none}
+.pk-close{flex:none;border:none;background:none;width:32px;height:32px;color:var(--soft);cursor:pointer;font-size:1rem}
+.pk-lbl{font-size:.78rem;color:var(--soft);font-weight:700;margin:8px 2px 2px}
+.pk-list{display:grid;gap:4px;margin-top:6px;max-height:330px;overflow-y:auto;overscroll-behavior:contain}
+.pk-row{display:flex;gap:4px}
+.pk-item{flex:1;min-width:0;display:flex;align-items:center;gap:10px;border:none;background:var(--bg2);border-radius:14px;padding:6px 10px;text-align:left;cursor:pointer}
+.pk-item:hover{background:var(--pink-soft)}
+.pk-e{font-size:1.4rem;flex:none}
+.pk-n{min-width:0;font-weight:700;line-height:1.2}
+.pk-n small{display:block;font-weight:500;color:var(--soft);font-size:.78rem}
+.pk-del{flex:none;border:none;background:var(--bg2);border-radius:14px;width:40px;cursor:pointer}
+.pk-custom{margin-top:8px;width:100%;border:2px solid var(--lav);background:var(--lav-soft);color:var(--ink);border-radius:14px;padding:9px 12px;font-weight:800;cursor:pointer;text-align:left}
+.pk-title{font-weight:800}
+.pk-form{display:grid;gap:8px}
+.pk-grid{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px}
+.pk-acts{display:flex;gap:8px;flex-wrap:wrap}
+.field label.tickrow,label.tickrow{display:flex;align-items:flex-start;gap:8px;font-weight:700;cursor:pointer;color:var(--ink);font-size:.92rem;margin:0}
+.field label.tickrow input,label.tickrow input{width:20px;height:20px;flex:none;accent-color:var(--pink);margin-top:3px;padding:0}
+.tickrow small{display:block;font-weight:500;color:var(--soft);font-size:.8rem}
+.settings .tickrow{background:var(--bg2);border-radius:14px;padding:10px 12px}
+
+/* ===== v2: water & sleep ===== */
+.life{display:grid;gap:12px}
+.life h4{font-size:1.1rem;font-weight:800}
+.lf-water{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:center;background:var(--water-soft);border-radius:22px;padding:14px}
+.bodybox{width:150px;aspect-ratio:140/280}
+.bodybox.sm{width:96px}
+.bodybox svg{width:100%;height:100%;display:block;overflow:visible}
+.b-out circle,.b-out rect{fill:var(--water-line);stroke:var(--water-line);stroke-width:9}
+.b-in circle,.b-in rect{fill:var(--card)}
+.wv1{fill:var(--water)}
+.wv2{fill:var(--water-2);opacity:.75}
+.wv{animation:wave 2.8s linear infinite}
+.wv2{animation-duration:4.2s}
+.lvl{transition:transform 1.5s cubic-bezier(.3,1.15,.5,1)}
+.b-pct{font:800 24px var(--font);fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:var(--card);stroke-width:6px;stroke-linejoin:round}
+.b-bub{fill:#fff;opacity:.55;animation:bub 3.2s ease-in infinite}
+@keyframes wave{to{transform:translateX(70px)}}
+@keyframes bub{0%{transform:translateY(0);opacity:0}20%{opacity:.6}100%{transform:translateY(-60px);opacity:0}}
+.lf-big b{font-size:2.4rem;font-weight:800;color:var(--water);line-height:1}
+.lf-big span{display:block;color:var(--soft);font-weight:700;margin-top:2px}
+.lf-left{font-size:.92rem;margin-top:6px}
+.lf-left b{color:var(--water)}
+.lf-sleep .lf-left b{color:var(--lav)}
+.glassbtns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0}
+.glassbtns .btn.primary{grid-column:1/-1;order:-1}
+.glassbtns small{font-weight:600;opacity:.85}
+.lf-sleep{background:var(--lav-soft);border-radius:22px;padding:14px}
+.sleeprow{display:flex;align-items:flex-end;gap:8px;margin-top:8px}
+.sleeprow .field{flex:1;min-width:0}
+.stepbtn{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--card);font-size:1.3rem;font-weight:800;cursor:pointer;flex:none}
+.moons{display:flex;gap:4px;margin-top:12px}
+.moons .seg{flex:1;min-width:0;height:24px;border-radius:8px;background:var(--card);overflow:hidden;position:relative}
+.moons .seg i{position:absolute;left:0;top:0;bottom:0;background:var(--lav);transition:width .6s ease}
+.moons .seg span{position:absolute;inset:0;display:grid;place-items:center;font-size:.68rem;font-weight:800;color:var(--soft)}
+.moons .seg.on span{color:#fff}
+.moons .xtra{flex:none;font-size:.75rem;font-weight:800;background:var(--mint-soft);color:var(--mint);border-radius:8px;padding:2px 6px;display:grid;place-items:center}
+.moons.sm .seg{height:14px;border-radius:6px}
+.moons.sm .seg span{display:none}
+.lifehome{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center}
+.lh-row b{font-size:1.5rem;font-weight:800;display:block;line-height:1.1}
+.lh-row span{font-size:.85rem;color:var(--soft)}
+.lh-btns{display:flex;gap:6px;margin:8px 0 14px}
+.lh-btns .btn.primary{flex:none}
+@container (max-width:640px){
+  .fitem{grid-template-columns:44px minmax(0,1fr)}
+  .f-thumb{width:44px;height:44px;font-size:1.45rem}
+  .f-ctrl{grid-column:1/-1;grid-template-columns:64px minmax(0,1fr) minmax(0,1fr) 38px}
+}
+@media (max-width:600px){
+  .fitem{grid-template-columns:44px minmax(0,1fr)}
+  .f-thumb{width:44px;height:44px;font-size:1.45rem}
+  .f-ctrl{grid-column:1/-1;grid-template-columns:54px minmax(0,1fr) minmax(0,1fr) 38px}
+  .f-ctrl input,.f-ctrl select{padding:7px 6px}
+  .f-kc input{padding-right:34px}
+  .f-kc span{right:7px;font-size:.72rem}
+  .meal-ic{width:42px;height:42px;font-size:1.3rem}
+  .meal-t b{font-size:1.05rem}
+  .pk-grid{grid-template-columns:1fr 1fr}
+  .pk-grid .field:last-child{grid-column:1/-1}
+}
+@media (max-width:420px){
+  .meal-h{gap:6px;padding:8px}
+  .meal-tg{gap:9px}
+  .meal-h .addpill{padding:4px 10px}
+  .meal-h .addpill .tx{display:none}
+  .meal:not(.open) .meal-k:not(.on){display:none}
+  .lf-water{grid-template-columns:110px minmax(0,1fr);gap:12px}
+  .lf-water .bodybox{width:110px}
+  .lifehome{grid-template-columns:80px minmax(0,1fr)}
+  .bodybox.sm{width:80px}
+  .motiv p{font-size:1rem}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -418,6 +559,11 @@ body{overscroll-behavior-y:contain}
       <div class="sync" id="sync">Loading your data…</div>
     </div>
   </header>
+  <div class="motiv" id="motiv" role="note" hidden>
+    <div class="motiv-ic" aria-hidden="true">🌸</div>
+    <p id="motivText" lang="bn"></p>
+    <button type="button" id="motivX" aria-label="Close motivation">✕</button>
+  </div>
 
     <section class="card scr misscard" data-s="home" id="missCard" aria-label="Days not logged" hidden>
       <h3>📌 Days not logged yet</h3>
@@ -484,6 +630,7 @@ body{overscroll-behavior-y:contain}
       <div class="quick" id="quick"></div>
       <div class="tabs" role="tablist" id="tabs">
         <button role="tab" data-tab="health" aria-selected="true">🩺 Health</button>
+        <button role="tab" data-tab="life" aria-selected="false">💧 Water &amp; sleep<span class="cnt" id="cntLife" hidden></span></button>
         <button role="tab" data-tab="food" aria-selected="false">🍽️ Food<span class="cnt" id="cntFood" hidden></span></button>
         <button role="tab" data-tab="move" aria-selected="false">🏃‍♀️ Exercise<span class="cnt" id="cntMove" hidden></span></button>
         <button role="tab" data-tab="meds" aria-selected="false">💊 Medicine<span class="cnt" id="cntMeds" hidden></span></button>
@@ -505,16 +652,38 @@ body{overscroll-behavior-y:contain}
         </div>
       </div>
 
-      <div class="panel" data-panel="food" hidden>
-        <div class="colhead food"><span>Meal</span><span>Food</span><span>Qty</span><span>kcal</span><span></span></div>
-        <div class="rows" id="foodRows"></div>
-        <div class="addrow">
-          <button class="btn ghost small" data-addfood="Breakfast">+ Breakfast</button>
-          <button class="btn ghost small" data-addfood="Lunch">+ Lunch</button>
-          <button class="btn ghost small" data-addfood="Snack">+ Snack</button>
-          <button class="btn ghost small" data-addfood="Dinner">+ Dinner</button>
+      <div class="panel" data-panel="life" hidden>
+        <div class="life">
+          <div class="lf-water">
+            <div class="bodybox" id="bodyLog"></div>
+            <div class="lf-ctl">
+              <h4>💧 Water</h4>
+              <div class="lf-big"><b id="wtNow">0</b> <span id="wtOf">of 2.5 L</span></div>
+              <div class="lf-left" id="wtLeft"></div>
+              <div class="glassbtns">
+                <button type="button" class="btn ghost small" data-wadd="-0.25" aria-label="Remove one glass">− glass</button>
+                <button type="button" class="btn primary small" data-wadd="0.25">+ 1 glass <small>250 ml</small></button>
+                <button type="button" class="btn lav small" data-wadd="0.5">+ 500 ml</button>
+              </div>
+              <div class="field"><label for="fWater">Liters drunk this day</label><input id="fWater" type="number" step="0.05" min="0" inputmode="decimal" placeholder="e.g. 1.75"></div>
+            </div>
+          </div>
+          <div class="lf-sleep">
+            <h4>😴 Sleep</h4>
+            <div class="sleeprow">
+              <button type="button" class="stepbtn" data-sadd="-0.5" aria-label="Half hour less">−</button>
+              <div class="field"><label for="fSleep">Hours slept (last night)</label><input id="fSleep" type="number" step="0.5" min="0" max="24" inputmode="decimal" placeholder="e.g. 7.5"></div>
+              <button type="button" class="stepbtn" data-sadd="0.5" aria-label="Half hour more">+</button>
+            </div>
+            <div class="moons" id="moonsLog"></div>
+            <div class="lf-left" id="slLeft"></div>
+          </div>
         </div>
-        <div class="hint">Start typing a food and pick it from the list. kcal fills in from a typical Bangladeshi home portion; change it if your portion was different.</div>
+      </div>
+
+      <div class="panel" data-panel="food" hidden>
+        <div class="meals" id="foodRows"></div>
+        <div class="hint">Tap “Add item” under a meal and pick a food. kcal fills in from a typical Bangladeshi home portion. Not on the list? Add it as your own food.</div>
         <div class="sumline" id="foodSum">0 kcal eaten</div>
       </div>
 
@@ -566,6 +735,19 @@ body{overscroll-behavior-y:contain}
         <div class="kbar">
           <div class="kbar-track"><div class="kbar-fill" id="kFill" style="width:0"></div></div>
           <div class="kbar-label" id="kLabel">Add your age in settings to get a daily kcal target</div>
+        </div>
+      </section>
+
+      <section class="card scr" data-s="home" aria-label="Water and sleep">
+        <h3 id="lifeTitle">💧 Water &amp; sleep, day 1</h3>
+        <div class="lifehome">
+          <div class="bodybox sm" id="bodyHome"></div>
+          <div class="lh-info">
+            <div class="lh-row"><b id="lhWater">0 L</b><span id="lhWaterLbl">of 2.5 L water</span></div>
+            <div class="lh-btns"><button type="button" class="btn primary small" data-hwadd="0.25">+ 1 glass</button><button type="button" class="btn ghost small" data-hwadd="-0.25" aria-label="Remove one glass">−</button></div>
+            <div class="lh-row"><b id="lhSleep">–</b><span id="lhSleepLbl">sleep</span></div>
+            <div class="moons sm" id="moonsHome"></div>
+          </div>
         </div>
       </section>
 
@@ -633,6 +815,12 @@ body{overscroll-behavior-y:contain}
       <div class="ms-text" id="msText"></div>
     </section>
 
+    <section class="card full scr" data-s="charts" aria-label="Water and sleep chart">
+      <h3>💧 Water &amp; 😴 sleep</h3>
+      <div class="chartbox sm"><canvas id="lChart" aria-label="Water and sleep chart"></canvas></div>
+      <div class="legend-note" id="lNote">Blue bars = liters of water. Purple line = hours of sleep. Dashed lines are your targets.</div>
+    </section>
+
     <section class="card scr" data-s="charts" aria-label="Blood sugar chart">
       <h3>🩸 Blood sugar</h3>
       <div class="chartbox sm"><canvas id="sChart"></canvas></div>
@@ -685,7 +873,7 @@ body{overscroll-behavior-y:contain}
       <div class="tablewrap">
         <table id="dayTable">
           <thead><tr>
-            <th>Day</th><th>Date</th><th>Weight</th><th>Change</th><th>Fasting</th><th>2h after breakfast</th><th>Before dinner</th><th>2h after dinner</th><th>kcal eaten</th><th>kcal burned</th><th>Exercise</th><th>Medicine</th><th>Mood</th><th>Notes</th><th>PDF</th>
+            <th>Day</th><th>Date</th><th>Weight</th><th>Change</th><th>Fasting</th><th>2h after breakfast</th><th>Before dinner</th><th>2h after dinner</th><th>kcal eaten</th><th>kcal burned</th><th>Exercise</th><th>Water</th><th>Sleep</th><th>Medicine</th><th>Mood</th><th>Notes</th><th>PDF</th>
           </tr></thead>
           <tbody id="tbody"></tbody>
         </table>
@@ -702,6 +890,7 @@ body{overscroll-behavior-y:contain}
       <div class="appset">
         <button class="btn lav small" id="installBtn2" hidden>📲 Install on this phone</button>
         <button class="btn ghost small" id="updBtn">🔄 Check for update</button>
+        <button class="btn ghost small" id="notifBtn" hidden>🔔 Turn on update alerts</button>
         <button class="btn ghost small" id="backupBtn">💾 Download backup</button>
         <button class="btn ghost small" id="importBtn">📥 Restore from backup</button>
         <button class="btn ghost small" id="outBtn" hidden>Sign out</button>
@@ -734,6 +923,10 @@ body{overscroll-behavior-y:contain}
           <div class="field"><label for="sUnit">Sugar unit</label>
             <select id="sUnit"><option value="mmol">mmol/L</option><option value="mgdl">mg/dL</option></select>
           </div>
+          <div class="set-group">Lifestyle</div>
+          <div class="field"><label for="sWater">Daily water target (liters)</label><input id="sWater" type="number" step="0.25" min="0.5" max="6" inputmode="decimal"></div>
+          <div class="field"><label for="sSleep">Sleep target (hours)</label><input id="sSleep" type="number" step="0.5" min="4" max="12" inputmode="decimal"></div>
+          <div class="field"><label class="tickrow"><input type="checkbox" id="sNoMotiv"> <span>Motivation card chai na<small>Tick korle app khulle motivation line ar dekhabe na</small></span></label></div>
         </div>
         <div class="actions">
           <button class="btn primary" id="saveSet">Save settings</button>
@@ -745,7 +938,6 @@ body{overscroll-behavior-y:contain}
 
   <div class="foot" id="foot">Tumi parbe, Riju 🌷</div>
 </div>
-<datalist id="foodList"></datalist>
 <datalist id="medList"></datalist>
 <datalist id="testList">
   <option value="HbA1c"><option value="Fasting blood sugar (lab)"><option value="Blood pressure"><option value="Lipid profile"><option value="Cholesterol"><option value="TSH (thyroid)"><option value="Creatinine"><option value="Vitamin D"><option value="Hemoglobin"><option value="Urine test"><option value="Doctor visit"><option value="Waist size (cm)">
@@ -769,7 +961,7 @@ body{overscroll-behavior-y:contain}
     <button class="linkbtn" id="lgReset">Forgot password?</button>
   </div>
 </div>
-<div class="upd" id="upd" role="status" hidden><span>✨ A new version is ready</span><button id="updNow">Update now</button><button class="ghost" id="updLater" aria-label="Later">✕</button></div>
+<div class="upd" id="upd" role="status" hidden><span id="updText">✨ A new version is ready</span><button id="updNow">Update now</button><button class="ghost" id="updLater" aria-label="Later">✕</button></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -789,9 +981,10 @@ const FIREBASE_CONFIG={
   appId: "1:909159071224:web:373d952ce363a613bb6a0d",
   measurementId: "G-TLXCJ1G8Q7"
 };
-const DEFAULTS={name:"Afroza Riju",startWeight:80.3,goalLoss:13,startDate:"2026-09-28",days:45,unit:"mmol",heightCm:"",mainGoal:55,p2Days:150,age:"",sex:"f",kcalGoal:""};
+const DEFAULTS={name:"Afroza Riju",startWeight:80.3,goalLoss:13,startDate:"2026-09-28",days:45,unit:"mmol",heightCm:"",mainGoal:55,p2Days:150,age:"",sex:"f",kcalGoal:"",waterGoal:2.5,sleepGoal:8,noMotiv:false};
 const MOODS=["😊","🥰","😐","😴","😣","💪"];
-const MEALS=["Breakfast","Lunch","Snack","Dinner"];
+const MEALS=["Breakfast","Lunch","Snack","Dinner","Other"];
+const MEAL_IC={Breakfast:"🍳",Lunch:"🍛",Snack:"🍪",Dinner:"🍲",Other:"🍽️"};
 const MED_TIMES=["Morning","Before breakfast","After breakfast","Noon","Before lunch","After lunch","Evening","Before dinner","After dinner","Bedtime"];
 /* kcal per unit, typical Bangladeshi home portions */
 const FOODS=[
@@ -818,11 +1011,84 @@ const FOODS=[
 ["Roasted chola (buut bhaja)","1 handful",120],["Lemon water, no sugar","1 glass",5],["Amra / jambura (seasonal fruit)","1 cup",60]
 ];
 const FOOD_MAP=new Map(FOODS.map(f=>[f[0].toLowerCase(),f]));
+/* ---------- v2: food units, own foods, emoji ---------- */
+const VOL={cup:1,bowl:1.5,glass:1,plate:2,tbsp:1/16,tsp:1/48};
+const UNITS=["cup","bowl","glass","plate","piece","egg","slice","handful","medium","portion","pack","can","tbsp","tsp","g"];
+const SING={pieces:"piece",eggs:"egg",slices:"slice",cups:"cup",bowls:"bowl",glasses:"glass",plates:"plate",handfuls:"handful",portions:"portion",packs:"pack",cans:"can"};
+function customList(){return (state.custom||[]).filter(c=>c&&c.n).map(c=>[c.n,c.u||"1 portion",num(c.k)||0,true]);}
+function findFood(n){const k=String(n||"").trim().toLowerCase();if(!k)return null;return customList().find(f=>f[0].toLowerCase()===k)||FOOD_MAP.get(k)||null;}
+function baseOf(f){const m=String(f[1]).trim().match(/^([\d.]+)\s*([a-zA-Z]+)/);const amt=m?(+m[1]||1):1;let u=m?m[2].toLowerCase():"portion";u=SING[u]||u;return{amt,u,per:f[2]/amt};}
+function unitFactor(b,u){if(!u||u===b.u)return 1;if(VOL[u]&&VOL[b.u])return VOL[u]/VOL[b.u];return null;}
+function autoKcal(f){const hit=findFood(f.name);if(!hit)return null;const b=baseOf(hit),fac=unitFactor(b,f.unit);if(fac===null)return null;return round(b.per*fac*(num(f.qty)??1));}
+function unitOpts(f){const hit=findFood(f.name);const b=hit?baseOf(hit):null;return [...new Set([b&&b.u,f.unit,...UNITS].filter(Boolean))];}
+function mkFood(meal,name,portions){const hit=findFood(name);const b=hit?baseOf(hit):{amt:1,u:"portion",per:0};const qty=+((portions??1)*b.amt).toFixed(2);return{meal,name:hit?hit[0]:name,qty,unit:b.u,kcal:round(b.per*qty)};}
+function normFood(x){const f={...x};if(!f.unit){const hit=findFood(f.name);if(hit){const b=baseOf(hit);f.unit=b.u;if(b.amt!==1&&num(f.qty)!==null)f.qty=+(num(f.qty)*b.amt).toFixed(2);}else f.unit="portion";}return f;}
+function qtyText(f){const q=num(f.qty)??1;return f.unit?`${+q.toFixed(2)} ${f.unit}`:`× ${q}`;}
+const EMO=[[/salad/,"🥗"],[/chicken/,"🍗"],[/bhat|rice|khichuri|polao|biryani|tehari/,"🍚"],[/ruti|paratha|luchi|puri/,"🫓"],[/bread/,"🍞"],[/oats|chira|muri/,"🥣"],[/noodle/,"🍜"],[/egg|dim /,"🥚"],
+[/fish|ilish|rui|katla|pangas|tilapia|mola|kachki/,"🐟"],[/beef|mutton/,"🥩"],[/dal|soup/,"🍲"],[/chola|soybean|sprout/,"🫘"],[/alu/,"🥔"],[/begun/,"🍆"],[/tomato/,"🍅"],[/cucumber/,"🥒"],[/kumra|pumpkin/,"🎃"],
+[/sobji|shak|lau|pepe|jhinga|korola|dherosh|kopi|vegetable/,"🥬"],[/coffee/,"☕"],[/green|black tea/,"🍵"],[/tea|cha\b/,"☕"],[/doi|yogurt/,"🍨"],[/milk/,"🥛"],[/soft drink|cola/,"🥤"],[/juice/,"🧃"],
+[/banana|kola\b/,"🍌"],[/apple/,"🍎"],[/guava|peyara/,"🍐"],[/papaya|pepe/,"🍈"],[/orange|malta/,"🍊"],[/mango/,"🥭"],[/watermelon/,"🍉"],[/amra|jambura|fruit/,"🍏"],[/dates|khejur/,"🌴"],
+[/almond|peanut|badam|buut|nut/,"🥜"],[/biscuit|cookie/,"🍪"],[/cake/,"🍰"],[/singara|samosa|roll/,"🥟"],[/chanachur/,"🥨"],[/mishti|rasgulla|sweet|misti/,"🍡"],[/lemon/,"🍋"],[/honey/,"🍯"],[/sugar/,"🍬"],[/oil|ghee/,"🫙"],[/water/,"💧"]];
+function foodEmoji(n){const t=String(n||"").toLowerCase();for(const [r,e] of EMO)if(r.test(t))return e;return "🍽️";}
+const fmtL=v=>{v=num(v)||0;return String(+v.toFixed(2));};
+const fmtH=v=>{v=num(v)||0;const h=Math.floor(v),m=Math.round((v-h)*60);return m?`${h}h ${m}m`:`${h} h`;};
+function waterGoal(){return num(S().waterGoal)||2.5;}
+function sleepGoal(){return num(S().sleepGoal)||8;}
+
+/* ---------- v2: Bangla motivation lines ---------- */
+const MOTIV=[
+"আজকের ছোট্ট একটা ভালো সিদ্ধান্তই কালকের বড় পরিবর্তন। 🌸",
+"ওজন কমানো কোনো দৌড় না, এটা নিজের যত্ন নেওয়ার একটা সুন্দর অভ্যাস। 💗",
+"একদিন ভুল হলে কিছুই নষ্ট হয় না, পরের বেলা থেকেই আবার শুরু করো। 🌷",
+"এক গ্লাস পানি, দশ মিনিট হাঁটা আর ভালো ঘুম, এগুলোই তোমার আসল সুপারপাওয়ার। 💧",
+"তুমি নিজেকে যতটা ভাবো, তার চেয়ে অনেক বেশি শক্ত। 💪",
+"মেশিনের সংখ্যা না, শরীর হালকা লাগাটাই আসল জয়। ✨",
+"আজ শুধু আজকের দিনটা ভালোভাবে পার করো, বাকিটা নিজে থেকেই হয়ে যাবে। 🌼",
+"প্রতিটা হাঁটা, প্রতিটা মেপে খাওয়া ভাত, সবই হিসাবে জমা হচ্ছে। 📈",
+"নিজেকে বকা না দিয়ে, নিজের সাথে বন্ধুর মতো কথা বলো। 🤍",
+"ধীরে চললেও থেমো না, পথ কিন্তু এগোচ্ছেই। 🐢",
+"সুগার কন্ট্রোলে রাখা মানে নিজের ভবিষ্যৎকে ভালোবাসা। 🩷",
+"আজ রাতে ঘুমটা পুরো করো, কালকের শরীর তোমাকে ধন্যবাদ দেবে। 😴",
+"ক্ষুধা লাগলে আগে এক গ্লাস পানি, তারপর সিদ্ধান্ত। 💧",
+"অনেক দূর এসেছো, একবার পেছনে তাকিয়ে নিজের জন্য হাততালি দাও। 👏",
+"পারফেক্ট হতে হবে না, শুধু নিয়মিত থাকতে হবে। 🌱",
+"প্লেটের অর্ধেক সবজি, আর মনের পুরোটা সাহস। 🥗",
+"প্রতিদিন একটু একটু করে, এভাবেই বড় গল্প লেখা হয়। 📖",
+"খারাপ দিনগুলোও লিখে রাখো, ওগুলোও তোমার যাত্রার অংশ। 📝",
+"তোমার শরীর তোমার সবচেয়ে কাছের বন্ধু, ওর যত্ন নাও। 🌸",
+"আজ একটা মিষ্টি কম, কাল একটা হাসি বেশি। 😊",
+"নিজের উপর বিশ্বাস রাখো, তুমি এটা পারবেই। 🎀",
+"শুরু করাটাই সবচেয়ে কঠিন ছিল, আর সেটা তো তুমি করেই ফেলেছো। 🏆",
+"প্রতিটা সকাল একটা নতুন সুযোগ, আজকেরটা হাতছাড়া কোরো না। ☀️",
+"ধৈর্য রাখো, ফল আসতে সময় লাগে, কিন্তু আসেই। 🍃",
+"অন্য কারো সাথে না, গতকালের নিজের সাথে তুলনা করো। 🪞",
+"হাঁটতে হাঁটতে মনটাও হালকা হয়, শরীরটাও। 🚶‍♀️",
+"ওষুধ সময়মতো, খাবার মেপে, মন খুশি রেখে, আজকের কাজ এটুকুই। 💊",
+"নিজের জন্য যা করছো, সেটা পৃথিবীর সবচেয়ে সুন্দর কাজগুলোর একটা। 💐",
+"ক্লান্ত লাগলে একটু বিশ্রাম নাও, কিন্তু হাল ছেড়ো না। 🌙",
+"আজকের তুমি, কালকের তোমার জন্য একটা উপহার বানাচ্ছো। 🎁",
+"রাগ বা মন খারাপ হলে খাবার না, একটু হাঁটা বা কারো সাথে কথা। 🌿",
+"তুমি সুন্দর, আর তুমি আরও সুস্থ হচ্ছো, দুটোই সত্যি। 💖"
+];
+function gcd(a,b){return b?gcd(b,a%b):a;}
+function showMotiv(){
+  const el=$("motiv");let off=!!S().noMotiv,closed=false,idx=null;
+  try{if(localStorage.getItem("gu-nomotiv")==="1")off=true;closed=sessionStorage.getItem("gu-motiv-x")==="1";idx=sessionStorage.getItem("gu-motiv-i");}catch(e){}
+  if(off||closed){el.hidden=true;return;}
+  if(idx===null){
+    let n=0;try{n=(+localStorage.getItem("gu-motiv-n")||0)+1;localStorage.setItem("gu-motiv-n",n);}catch(e){n=Math.floor(Math.random()*999);}
+    let step=7;while(gcd(step,MOTIV.length)!==1)step++;
+    idx=(n*step)%MOTIV.length;try{sessionStorage.setItem("gu-motiv-i",idx);}catch(e){}
+  }
+  $("motivText").textContent=MOTIV[(+idx||0)%MOTIV.length];el.hidden=false;
+}
+function rememberMotivPref(){try{localStorage.setItem("gu-nomotiv",S().noMotiv?"1":"0");}catch(e){}}
+
 const ACTS=[["Walking (normal)",3.3],["Brisk walking",4.3],["Walking after meals",3],["Treadmill",5],["Jogging / running",8],["Cycling",6.8],["Skipping rope",10],
 ["Yoga",2.5],["Stretching",2.3],["Aerobics / Zumba",6.5],["Dancing",5],["Strength training",5],["Stair climbing",8],["Swimming",6],["Housework / cleaning",3.3],["Other exercise",4]];
 const ACT_MAP=new Map(ACTS);
 
-let state={settings:{...DEFAULTS},medical:[],regimen:[],legacy:{},days:{},raw:{}};
+let state={settings:{...DEFAULTS},medical:[],regimen:[],legacy:{},days:{},raw:{},custom:[]};
 let mode="none",db=null,mainRef=null,downloads=null,sampleFn=null;
 let selDay=1,draft=null,dirty=false,tab="health",tblExpanded=false,ideaOffset=0;
 let charts={};
@@ -880,7 +1146,7 @@ function kcalTarget(w){const g=num(S().kcalGoal);if(g)return{v:g,src:"yours"};co
 
 /* ---------- storage ---------- */
 function setSync(t){$("sync").textContent=t;}
-function snapshotMain(){const r={...state.raw};delete r.id;return JSON.parse(JSON.stringify({...r,settings:state.settings,medical:state.medical,regimen:state.regimen,entries:state.legacy}));}
+function snapshotMain(){const r={...state.raw};delete r.id;return JSON.parse(JSON.stringify({...r,settings:state.settings,medical:state.medical,regimen:state.regimen,custom:state.custom||[],entries:state.legacy}));}
 const queues={};
 function enqueue(key,fn){
   setSync(navigator.onLine?"⏳ Saving…":"📴 Offline, will sync later");
@@ -889,7 +1155,7 @@ function enqueue(key,fn){
   return queues[key];
 }
 function saveLocal(){
-  try{const entries={...state.legacy,...state.days};localStorage.setItem("riju-tracker-v2",JSON.stringify({settings:state.settings,medical:state.medical,regimen:state.regimen,entries}));setSync("💾 Saved on this device");}catch(e){setSync("⚠️ Not saved");}
+  try{const entries={...state.legacy,...state.days};localStorage.setItem("riju-tracker-v2",JSON.stringify({settings:state.settings,medical:state.medical,regimen:state.regimen,custom:state.custom||[],entries}));setSync("💾 Saved on this device");}catch(e){setSync("⚠️ Not saved");}
 }
 function persistMain(){
   if(mode==="db"){const snap=snapshotMain();return enqueue("main",()=>mainRef.set(snap));}
@@ -912,9 +1178,9 @@ function persistDay(d){
 function loadLocal(){
   try{
     const v2=localStorage.getItem("riju-tracker-v2");
-    if(v2){const p=JSON.parse(v2);state={settings:{...DEFAULTS,...(p.settings||{})},medical:p.medical||[],regimen:p.regimen||[],legacy:{},days:p.entries||{},raw:{}};return;}
+    if(v2){const p=JSON.parse(v2);state={settings:{...DEFAULTS,...(p.settings||{})},medical:p.medical||[],regimen:p.regimen||[],legacy:{},days:p.entries||{},raw:{},custom:Array.isArray(p.custom)?p.custom:[]};rememberMotivPref();return;}
     const v1=localStorage.getItem("riju-tracker");
-    if(v1){const p=JSON.parse(v1);state={settings:{...DEFAULTS,...(p.settings||{})},medical:[],regimen:[],legacy:p.entries||{},days:{},raw:{}};}
+    if(v1){const p=JSON.parse(v1);state={settings:{...DEFAULTS,...(p.settings||{})},medical:[],regimen:[],legacy:p.entries||{},days:{},raw:{},custom:[]};}
   }catch(e){}
 }
 /* ---------- cloud (Firebase) ---------- */
@@ -968,7 +1234,7 @@ function startCloud(fdb){
   };
   mainRef.onSnapshot(snap=>{
     if(!gotMain){mainExists=snap.exists;serverChecked=!snap.metadata.fromCache;}
-    if(snap.exists){const x=snap.data()||{};state.settings={...DEFAULTS,...(x.settings||{})};state.raw=JSON.parse(JSON.stringify(x));state.medical=Array.isArray(x.medical)?JSON.parse(JSON.stringify(x.medical)):[];state.regimen=Array.isArray(x.regimen)?JSON.parse(JSON.stringify(x.regimen)):[];state.legacy=x.entries?JSON.parse(JSON.stringify(x.entries)):{};}
+    if(snap.exists){const x=snap.data()||{};state.settings={...DEFAULTS,...(x.settings||{})};state.raw=JSON.parse(JSON.stringify(x));state.medical=Array.isArray(x.medical)?JSON.parse(JSON.stringify(x.medical)):[];state.regimen=Array.isArray(x.regimen)?JSON.parse(JSON.stringify(x.regimen)):[];state.legacy=x.entries?JSON.parse(JSON.stringify(x.entries)):{};state.custom=Array.isArray(x.custom)?JSON.parse(JSON.stringify(x.custom)):[];rememberMotivPref();}
     setSync(snap.metadata.fromCache&&!navigator.onLine?"📴 Offline, saved on phone":"☁️ Synced");gotMain=true;maybeFirst();renderAll();
   },denied);
   db.collection("days").onSnapshot(qs=>{
@@ -979,7 +1245,7 @@ function startCloud(fdb){
 function importData(x){
   if(!x||typeof x!=="object"||!(x.settings||x.entries)){toast("That file isn't a Glow Up backup");return false;}
   state.settings={...DEFAULTS,...(x.settings||{})};
-  state.medical=Array.isArray(x.medical)?x.medical:state.medical;state.regimen=Array.isArray(x.regimen)?x.regimen:state.regimen;
+  state.medical=Array.isArray(x.medical)?x.medical:state.medical;state.regimen=Array.isArray(x.regimen)?x.regimen:state.regimen;if(Array.isArray(x.custom))state.custom=x.custom;
   const days={};Object.entries(x.entries||{}).forEach(([k,v])=>{const d=+k;if(d>=1&&v&&typeof v==="object"){const c=JSON.parse(JSON.stringify(v));delete c.day;days[d]=c;}});
   state.legacy={};state.days={...state.days,...days};
   if(mode==="db"){persistMain();Object.keys(days).forEach(d=>persistDay(+d));}else saveLocal();
@@ -987,7 +1253,7 @@ function importData(x){
   toast(`Restored ${Object.keys(days).length} days ✨`);return true;
 }
 async function backup(){
-  const data=JSON.stringify({app:"glow-up",version:1,exportedAt:new Date().toISOString(),settings:state.settings,medical:state.medical,regimen:state.regimen,entries:{...state.legacy,...state.days}});
+  const data=JSON.stringify({app:"glow-up",version:2,exportedAt:new Date().toISOString(),settings:state.settings,medical:state.medical,regimen:state.regimen,custom:state.custom||[],entries:{...state.legacy,...state.days}});
   try{await downloads.save({filename:`${firstName().toLowerCase()}-glowup-backup-${isoDate(new Date())}.json`,data:new Blob([data],{type:"application/json"})});toast("Backup saved 💾");}
   catch(e){if(!e||e.code!=="declined")toast("Couldn't save the backup");}
 }
@@ -1050,27 +1316,31 @@ function sugarClass(v,kind){
 function unitLabel(){return S().unit==="mgdl"?"mg/dL":"mmol/L";}
 
 /* ---------- draft (what the form is editing) ---------- */
-function blankDraft(){return{w:"",fs:"",ab:"",bd:"",ad:"",mood:"",note:"",foods:[],acts:[],meds:[],doses:{}};}
+function blankDraft(){return{w:"",fs:"",ab:"",bd:"",ad:"",water:"",sleep:"",mood:"",note:"",foods:[],acts:[],meds:[],doses:{}};}
 function loadDraft(){
   const e=E(selDay);const d=blankDraft();
   if(e){
-    ["w","fs","ab","bd","ad","mood","note"].forEach(k=>{if(e[k]!==undefined&&e[k]!==null)d[k]=e[k];});
-    d.foods=(e.foods||[]).map(x=>({...x}));d.meds=(e.meds||[]).map(x=>({...x}));d.doses={...(e.doses||{})};
+    ["w","fs","ab","bd","ad","water","sleep","mood","note"].forEach(k=>{if(e[k]!==undefined&&e[k]!==null)d[k]=e[k];});
+    d.foods=(e.foods||[]).map(normFood);d.meds=(e.meds||[]).map(x=>({...x}));d.doses={...(e.doses||{})};
     d.acts=(e.acts||[]).map(x=>({...x}));
     if(!d.acts.length&&num(e.ex))d.acts=[{type:"Other exercise",min:num(e.ex),kcal:round(4*weightOn(selDay)*num(e.ex)/60)}];
   }
   draft=d;dirty=false;
+  const withFood=d.foods.map(f=>MEALS.includes(f.meal)?f.meal:"Other");
+  if(loadedDay===selDay){withFood.forEach(m=>openMeals.add(m));}
+  else{openMeals=new Set(withFood);openFor=null;pickQ="";pickCustom=false;}
+  loadedDay=selDay;
 }
 function readHealthInputs(){
-  draft.w=$("fW").value;draft.fs=$("fFS").value;draft.ab=$("fAB").value;draft.bd=$("fBD").value;draft.ad=$("fAD").value;draft.note=$("fN").value;
+  draft.w=$("fW").value;draft.fs=$("fFS").value;draft.ab=$("fAB").value;draft.bd=$("fBD").value;draft.ad=$("fAD").value;draft.note=$("fN").value;draft.water=$("fWater").value;draft.sleep=$("fSleep").value;
 }
 function draftToEntry(){
   readHealthInputs();
   const e={};
-  ["w","fs","ab","bd","ad"].forEach(k=>{const v=num(draft[k]);if(v!==null)e[k]=v;});
+  ["w","fs","ab","bd","ad","water","sleep"].forEach(k=>{const v=num(draft[k]);if(v!==null)e[k]=v;});
   if(draft.mood)e.mood=draft.mood;
   if(String(draft.note||"").trim())e.note=String(draft.note).trim();
-  const foods=draft.foods.filter(f=>String(f.name||"").trim()||num(f.kcal)).map(f=>{const o={meal:f.meal||"Snack",name:String(f.name||"").trim()||"Food",qty:num(f.qty)??1,kcal:round(num(f.kcal)||0)};if(f.m)o.m=1;return o;});
+  const foods=draft.foods.filter(f=>String(f.name||"").trim()||num(f.kcal)).map(f=>{const o={meal:f.meal||"Other",name:String(f.name||"").trim()||"Food",qty:num(f.qty)??1,kcal:round(num(f.kcal)||0)};if(f.unit)o.unit=f.unit;if(f.m)o.m=1;return o;});
   const acts=draft.acts.filter(a=>num(a.min)).map(a=>{const o={type:a.type||"Other exercise",min:num(a.min),kcal:round(num(a.kcal)||0)};if(a.m)o.m=1;return o;});
   const meds=draft.meds.filter(m=>String(m.name||"").trim()).map(m=>({name:String(m.name).trim(),dose:String(m.dose||"").trim(),time:m.time||"",taken:!!m.taken}));
   if(foods.length)e.foods=foods;
@@ -1093,6 +1363,7 @@ function renderHeader(){
   $("pageTitle").textContent=ph===1?`${S().days}-Day Glow Up`:`Glow Up: road to ${fmt(mainGoal())} kg`;
   document.title=`${firstName()}'s Glow Up 🌸`;
   $("foot").textContent=`Tumi parbe, ${firstName()} 🌷`;
+  showMotiv();
   document.querySelectorAll(".unitlbl").forEach(e=>e.textContent=`(${unitLabel()})`);
 }
 function pick(a,i){return a[i%a.length];}
@@ -1150,28 +1421,151 @@ function renderMissing(){
 function renderForm(){
   if(!draft)loadDraft();
   renderDaypick();
-  $("fW").value=draft.w??"";$("fFS").value=draft.fs??"";$("fAB").value=draft.ab??"";$("fBD").value=draft.bd??"";$("fAD").value=draft.ad??"";$("fN").value=draft.note??"";
+  $("fW").value=draft.w??"";$("fFS").value=draft.fs??"";$("fAB").value=draft.ab??"";$("fBD").value=draft.bd??"";$("fAD").value=draft.ad??"";$("fN").value=draft.note??"";$("fWater").value=draft.water??"";$("fSleep").value=draft.sleep??"";
   renderMoods();renderFoodRows();renderActRows();renderMedRows();
   $("saveBtn").textContent=`Save day ${selDay}${dirty?" •":""}`;
-  weightHint();renderTabs();renderChecklists();
+  weightHint();renderTabs();renderChecklists();renderLife();
 }
 function renderTabs(){
   document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.tab===tab)));
   document.querySelectorAll(".panel").forEach(p=>p.hidden=p.dataset.panel!==tab);
   const set=(id,n)=>{$(id).hidden=!n;$(id).textContent=n;};
-  set("cntFood",draft.foods.length);set("cntMove",draft.acts.length);const ad=adherence(selDay);$("cntMeds").hidden=!(ad.due||draft.meds.length);$("cntMeds").textContent=ad.due?`${ad.taken}/${ad.due}`:draft.meds.length;
+  set("cntFood",draft.foods.length);{const w=num(draft.water),sl=num(draft.sleep);$("cntLife").hidden=!(w||sl);$("cntLife").textContent=w?Math.round(w/waterGoal()*100)+"%":"✓";}set("cntMove",draft.acts.length);const ad=adherence(selDay);$("cntMeds").hidden=!(ad.due||draft.meds.length);$("cntMeds").textContent=ad.due?`${ad.taken}/${ad.due}`:draft.meds.length;
 }
 function renderMoods(){$("moods").innerHTML=MOODS.map(m=>`<button type="button" aria-pressed="${m===draft.mood}" data-m="${m}">${m}</button>`).join("");}
-function foodUnit(name){const f=FOOD_MAP.get(String(name||"").trim().toLowerCase());return f?`${f[1]} ≈ ${f[2]} kcal`:"";}
+let openMeals=new Set(),openFor=null,pickQ="",pickCustom=false,loadedDay=null;
+function mealOf(f){return MEALS.includes(f.meal)?f.meal:"Other";}
+function subText(f){const hit=findFood(f.name);if(!hit)return f.unit?`Your own amount`:"";const b=baseOf(hit);return unitFactor(b,f.unit)===null?`List portion is ${hit[1]}. Type the kcal for this unit`:`${hit[1]} ≈ ${hit[2]} kcal${hit[3]?", my food":""}`;}
+function foodItemHtml(f,i){
+  return `<div class="fitem" data-i="${i}">
+    <span class="f-thumb" aria-hidden="true">${foodEmoji(f.name)}</span>
+    <div class="f-info"><b>${esc(f.name||"Food")}</b><small>${esc(subText(f))}</small></div>
+    <div class="f-ctrl">
+      <input class="f-qty" data-k="qty" type="number" step="0.25" min="0" inputmode="decimal" value="${esc(f.qty??1)}" aria-label="Quantity of ${esc(f.name)}">
+      <select class="f-unit" data-k="unit" aria-label="Unit">${unitOpts(f).map(u=>`<option ${u===f.unit?"selected":""}>${esc(u)}</option>`).join("")}</select>
+      <label class="f-kc"><input data-k="kcal" type="number" step="5" min="0" inputmode="numeric" value="${esc(f.kcal??"")}" placeholder="0" aria-label="kcal for ${esc(f.name)}"><span>kcal</span></label>
+      <button type="button" class="x" data-del aria-label="Remove ${esc(f.name)}">✕</button>
+    </div></div>`;
+}
+function pickListHtml(){
+  const q=pickQ.trim().toLowerCase();let list,lbl;
+  if(!q){
+    const freq=new Map();allKeys().forEach(k=>(E(k).foods||[]).forEach(f=>{if(mealOf(f)===openFor){const n=String(f.name||"").toLowerCase();freq.set(n,(freq.get(n)||0)+1);}}));
+    const seen=new Set(),out=[];
+    [...[...freq.entries()].sort((a,b)=>b[1]-a[1]).map(([n])=>findFood(n)).filter(Boolean),...customList(),...FOODS].forEach(f=>{const k=f[0].toLowerCase();if(!seen.has(k)){seen.add(k);out.push(f);}});
+    list=out.slice(0,8);lbl=freq.size?`Often in your ${openFor.toLowerCase()}, or type to search`:"Type to search all foods";
+  }else{
+    const seen=new Set();
+    list=[...customList(),...FOODS].filter(f=>{const k=f[0].toLowerCase();if(seen.has(k)||!k.includes(q))return false;seen.add(k);return true;})
+      .sort((a,b)=>(a[0].toLowerCase().startsWith(q)?0:1)-(b[0].toLowerCase().startsWith(q)?0:1)).slice(0,12);
+    lbl=list.length?"":`“${pickQ.trim()}” isn't on the list yet`;
+  }
+  return `${lbl?`<div class="pk-lbl">${esc(lbl)}</div>`:""}${list.map(f=>`<div class="pk-row"><button type="button" class="pk-item" data-pick="${esc(f[0])}"><span class="pk-e" aria-hidden="true">${foodEmoji(f[0])}</span><span class="pk-n">${esc(f[0])}<small>${esc(f[1])}, ${round(f[2])} kcal${f[3]?", my food ⭐":""}</small></span></button>${f[3]?`<button type="button" class="pk-del" data-delcustom="${esc(f[0])}" aria-label="Delete ${esc(f[0])} from my foods">🗑</button>`:""}</div>`).join("")}`;
+}
+function pickCustomLabel(){const q=pickQ.trim();return `✏️ ${q?`Add “${esc(q)}” as my own food`:"Add my own food (not on the list)"}`;}
+function pickerHtml(){
+  if(pickCustom)return `<div class="picker"><div class="pk-form">
+    <div class="pk-title">✏️ Add your own food to ${esc(openFor)}</div>
+    <div class="field"><label for="ckName">Food name</label><input id="ckName" value="${esc(pickQ.trim())}" placeholder="e.g. Chicken roll" autocomplete="off"></div>
+    <div class="pk-grid">
+      <div class="field"><label for="ckQty">Amount</label><input id="ckQty" type="number" step="0.25" min="0" value="1" inputmode="decimal"></div>
+      <div class="field"><label for="ckUnit">Unit</label><select id="ckUnit">${UNITS.map(u=>`<option ${u==="piece"?"selected":""}>${u}</option>`).join("")}</select></div>
+      <div class="field"><label for="ckKcal">kcal for this amount</label><input id="ckKcal" type="number" step="5" min="0" inputmode="numeric" placeholder="e.g. 250"></div>
+    </div>
+    <label class="tickrow"><input type="checkbox" id="ckSave" checked><span>Save to my food list<small>Next time it shows up in search with this kcal</small></span></label>
+    <div class="pk-acts"><button type="button" class="btn primary small" data-ck="add">Add to ${esc(openFor)}</button><button type="button" class="btn ghost small" data-ck="back">Back to list</button></div>
+  </div></div>`;
+  return `<div class="picker"><div class="pk-search"><span aria-hidden="true">🔎</span><input class="pk-q" type="text" value="${esc(pickQ)}" placeholder="Search: bhat, dim, cha, ruti…" aria-label="Search food" autocomplete="off" enterkeyhint="done"><button type="button" class="pk-close" data-pk="close" aria-label="Close food search">✕</button></div>
+    <div class="pk-list" id="pkList">${pickListHtml()}</div>
+    <button type="button" class="pk-custom" id="pkCustom" data-pk="custom">${pickCustomLabel()}</button></div>`;
+}
 function renderFoodRows(){
-  $("foodRows").innerHTML=draft.foods.length?draft.foods.map((f,i)=>`<div class="row food" data-i="${i}">
-    <select data-k="meal" aria-label="Meal">${MEALS.map(m=>`<option ${m===f.meal?"selected":""}>${m}</option>`).join("")}</select>
-    <input class="f-name" data-k="name" list="foodList" value="${esc(f.name)}" placeholder="Food" aria-label="Food">
-    <input class="f-qty" data-k="qty" type="number" step="0.5" min="0" value="${esc(f.qty??1)}" aria-label="Quantity">
-    <input class="f-kcal" data-k="kcal" type="number" step="5" min="0" value="${esc(f.kcal??"")}" placeholder="kcal" aria-label="kcal">
-    <button class="x" data-del="food" aria-label="Remove food">✕</button>
-    <div class="unit">${esc(foodUnit(f.name))}</div></div>`).join(""):`<div class="empty">No food logged for this day yet. Add breakfast to begin.</div>`;
+  $("foodRows").innerHTML=MEALS.map(meal=>{
+    const items=draft.foods.map((f,i)=>({f,i})).filter(x=>mealOf(x.f)===meal);
+    const tot=items.reduce((a,x)=>a+(num(x.f.kcal)||0),0);
+    const open=openMeals.has(meal)||openFor===meal,picking=openFor===meal;
+    return `<div class="meal${open?" open":""}" data-meal="${meal}">
+      <div class="meal-h">
+        <button type="button" class="meal-tg" data-toggle aria-expanded="${open}">
+          <span class="meal-ic" aria-hidden="true">${MEAL_IC[meal]}</span>
+          <span class="meal-t"><b>${meal}</b><small>${items.length?`${items.length} item${items.length>1?"s":""}`:"No items added"}</small></span>
+        </button>
+        ${open?"":`<button type="button" class="addpill" data-add>＋ Add<span class="tx"> item</span></button>`}
+        <span class="meal-k${tot?" on":""}"><b>${round(tot)}</b> kcal</span>
+        <button type="button" class="chev" data-toggle aria-label="${open?"Close":"Open"} ${meal}">⌄</button>
+      </div>
+      ${open?`<div class="meal-b">${items.map(x=>foodItemHtml(x.f,x.i)).join("")}${picking?pickerHtml():""}
+        <div class="meal-f">${picking?"":`<button type="button" class="addpill big" data-add>＋ Add item</button>`}<span class="meal-tot">Total: <b>${round(tot)}</b> kcal</span></div></div>`:""}
+    </div>`;
+  }).join("");
   updateFoodSum();
+}
+function updateMealTotals(){
+  document.querySelectorAll("#foodRows .meal").forEach(el=>{
+    const tot=draft.foods.filter(f=>mealOf(f)===el.dataset.meal).reduce((a,f)=>a+(num(f.kcal)||0),0);
+    const k=el.querySelector(".meal-k");k.classList.toggle("on",tot>0);k.querySelector("b").textContent=round(tot);
+    const t=el.querySelector(".meal-tot b");if(t)t.textContent=round(tot);
+  });
+}
+function openPicker(meal){openMeals.add(meal);openFor=meal;pickQ="";pickCustom=false;renderFoodRows();const q=$("foodRows").querySelector(".pk-q");if(q)q.focus({preventScroll:true});const pk=$("foodRows").querySelector(".picker");if(pk)pk.scrollIntoView({block:"nearest",behavior:"smooth"});}
+function addFoodToMeal(f){draft.foods.push(f);openMeals.add(f.meal);openFor=null;pickQ="";pickCustom=false;renderFoodRows();renderTabs();markDirty();renderIdeas();}
+
+/* water & sleep */
+let bodyN=0;
+const BODY_SHAPES=`<circle cx="70" cy="34" r="24"/><rect x="60" y="50" width="20" height="20" rx="6"/><rect x="38" y="64" width="64" height="104" rx="24"/><rect x="40" y="140" width="60" height="40" rx="16"/>
+<rect x="15" y="70" width="18" height="96" rx="9" transform="rotate(9 24 72)"/><rect x="107" y="70" width="18" height="96" rx="9" transform="rotate(-9 116 72)"/><rect x="42" y="160" width="25" height="108" rx="12"/><rect x="73" y="160" width="25" height="108" rx="12"/>`;
+const WAVE="M-140 0"+" q17.5 -7 35 0 t35 0".repeat(12)+" V300 H-140Z";
+function bodyY(p){return 270-p*262;}
+function renderBody(el,pct){
+  if(!el)return;
+  if(!el.firstChild){
+    const id="bc"+(++bodyN);
+    el.innerHTML=`<svg viewBox="0 0 140 280" role="img" aria-label="Water progress"><defs><clipPath id="${id}">${BODY_SHAPES}</clipPath></defs>
+      <g class="b-out">${BODY_SHAPES}</g><g class="b-in">${BODY_SHAPES}</g>
+      <g clip-path="url(#${id})"><g class="lvl" style="transform:translateY(${bodyY(0)}px)"><path class="wv wv2" d="${WAVE}" transform="translate(-20 -3)"/><path class="wv wv1" d="${WAVE}"/>
+        <circle class="b-bub" cx="56" cy="40" r="3"/><circle class="b-bub" cx="84" cy="70" r="2.4" style="animation-delay:1.1s"/><circle class="b-bub" cx="68" cy="100" r="2" style="animation-delay:2s"/></g></g>
+      <text class="b-pct" x="70" y="122">0%</text></svg>`;
+    el.getBoundingClientRect();
+  }
+  const lvl=el.querySelector(".lvl");requestAnimationFrame(()=>{lvl.style.transform=`translateY(${bodyY(pct)}px)`;});
+  el.querySelector(".b-pct").textContent=Math.round(pct*100)+"%";
+  el.querySelector("svg").setAttribute("aria-label",`Water: ${Math.round(pct*100)}% of today's target`);
+}
+function renderMoons(el,h,goal){
+  if(!el)return;const n=Math.max(1,Math.ceil(goal));let out="";
+  for(let i=0;i<n;i++){const segMax=Math.min(1,goal-i),fill=h===null?0:Math.max(0,Math.min(segMax,h-i))/segMax;out+=`<div class="seg${fill>=1?" on":""}" title="Hour ${i+1}"><i style="width:${fill*100}%"></i><span>${i+1}</span></div>`;}
+  if(h!==null&&h>goal)out+=`<div class="xtra">+${fmtH(h-goal)}</div>`;
+  el.innerHTML=out;
+}
+function renderLife(){
+  if(!draft)return;
+  const w=num(draft.water)||0,g=waterGoal(),pct=Math.min(1,w/g),left=g-w;
+  renderBody($("bodyLog"),pct);renderBody($("bodyHome"),pct);
+  $("wtNow").textContent=fmtL(w)+" L";$("wtOf").textContent=`of ${fmtL(g)} L target`;
+  $("wtLeft").innerHTML=w<=0?`Target ${fmtL(g)} L, about ${Math.ceil(g/.25)} glasses. Tap + each time you drink.`
+    :left>.001?`<b>${fmtL(left)} L</b> still to go, about ${Math.ceil(left/.25-1e-9)} more glass${Math.ceil(left/.25-1e-9)>1?"es":""}`
+    :`🎉 Water target done${w-g>.01?`, ${fmtL(w-g)} L extra`:""}!`;
+  $("lhWater").textContent=fmtL(w)+" L";$("lhWaterLbl").textContent=left>.001?`of ${fmtL(g)} L water, ${fmtL(left)} L to go`:`of ${fmtL(g)} L water, target done 🎉`;
+  const sl=num(draft.sleep),sg=sleepGoal();
+  renderMoons($("moonsLog"),sl,sg);renderMoons($("moonsHome"),sl,sg);
+  $("slLeft").innerHTML=sl===null?`Target ${fmtH(sg)}. Enter how long you slept.`
+    :sl>=sg?`🌟 Sleep target met${sl>sg?`, ${fmtH(sl-sg)} extra`:""}`
+    :`<b>${fmtH(sg-sl)}</b> short of your ${fmtH(sg)} target`;
+  $("lhSleep").textContent=sl===null?"–":fmtH(sl);
+  $("lhSleepLbl").textContent=sl===null?`sleep not logged (target ${fmtH(sg)})`:sl>=sg?`sleep, target ${fmtH(sg)} met 🌟`:`sleep, ${fmtH(sg-sl)} short of ${fmtH(sg)}`;
+  $("lifeTitle").textContent=`💧 Water & sleep, day ${selDay}`;
+}
+function addWater(delta,save){
+  const before=num(draft.water)||0,g=waterGoal();
+  const v=Math.max(0,Math.round((before+delta)*100)/100);draft.water=v?v:"";$("fWater").value=draft.water;
+  renderLife();renderTabs();
+  if(before<g&&v>=g){party(false);toast("💧 Water target done! Shabash 🎉");}
+  if(save)saveDay(true).then(()=>{if(!(before<g&&v>=g))toast(delta>0?`💧 +${Math.round(delta*1000)} ml saved`:"Removed one glass");});
+  else markDirty();
+}
+function addSleep(delta){
+  const cur=num(draft.sleep);const v=cur===null?sleepGoal():Math.max(0,Math.min(24,cur+delta));
+  draft.sleep=v;$("fSleep").value=v;renderLife();renderTabs();markDirty();
 }
 function actKcal(a){const met=ACT_MAP.get(a.type)||4;const w=num(draft.w)||weightOn(selDay);return round(met*w*(num(a.min)||0)/60);}
 function renderActRows(){
@@ -1193,11 +1587,11 @@ function renderMedRows(){
   $("medList").innerHTML=[...names].map(n=>`<option value="${esc(n)}">`).join("");
 }
 function updateFoodSum(){
-  const by={};draft.foods.forEach(f=>{by[f.meal]=(by[f.meal]||0)+(num(f.kcal)||0);});
+  const by={};draft.foods.forEach(f=>{const m=mealOf(f);by[m]=(by[m]||0)+(num(f.kcal)||0);});
   const tot=draft.foods.reduce((a,f)=>a+(num(f.kcal)||0),0);
   const parts=MEALS.filter(m=>by[m]).map(m=>`${m} ${round(by[m])}`);
   $("foodSum").textContent=`${round(tot)} kcal eaten`+(parts.length?` (${parts.join(", ")})`:"");
-  renderKcal();
+  updateMealTotals();renderKcal();
 }
 function updateActSum(){
   const mins=draft.acts.reduce((a,x)=>a+(num(x.min)||0),0),k=draft.acts.reduce((a,x)=>a+(num(x.kcal)||0),0);
@@ -1375,7 +1769,8 @@ function renderIdeas(){
 function usePlan(){
   const p=PLANS[planIdx];
   if(draft.foods.length&&!confirm(`Day ${selDay} already has ${draft.foods.length} food items. Replace them with plan ${planIdx+1}?`))return;
-  draft.foods=[];MEAL_KEYS.forEach(([k,meal])=>p[k].forEach(([n,q])=>draft.foods.push({meal,name:n,qty:q,kcal:round(foodKcal(n)*q)})));
+  draft.foods=[];MEAL_KEYS.forEach(([k,meal])=>p[k].forEach(([n,q])=>draft.foods.push(mkFood(meal,n,q))));
+  openMeals=new Set(draft.foods.map(mealOf));openFor=null;
   markDirty();tab="food";renderFoodRows();renderTabs();nav("log");
   toast(`Plan added to day ${selDay}. Change what you ate differently, then tap Save.`);
 }
@@ -1424,7 +1819,7 @@ function renderTable(){
     const ki=kIn(e),ke=kEx(e,d),em=exMin(e);
     rows+=`<tr data-d="${d}" class="${d===td?"is-today":""} ${d>td?"future":""} ${d===S().days+1&&hasPhase2()?"gate":""}"><td><b>${d}</b></td><td>${fmtDate(dayDate(d))}</td><td>${w!==null?"<b>"+fmt(w)+"</b>":""}</td><td>${ch}</td>
     <td>${sugarCell(e.fs,"pre")}</td><td>${sugarCell(e.ab,"post")}</td><td>${sugarCell(e.bd,"pre")}</td><td>${sugarCell(e.ad,"post")}</td>
-    <td>${ki?round(ki):""}</td><td>${ke?round(ke):""}</td><td>${em?em+" min":""}</td><td class="wrapc">${medCell(d)}</td><td>${esc(e.mood||"")}</td><td class="note">${esc(e.note||"")}</td>
+    <td>${ki?round(ki):""}</td><td>${ke?round(ke):""}</td><td>${em?em+" min":""}</td><td>${num(e.water)?fmtL(e.water)+" L":""}</td><td>${num(e.sleep)!==null?fmtH(e.sleep):""}</td><td class="wrapc">${medCell(d)}</td><td>${esc(e.mood||"")}</td><td class="note">${esc(e.note||"")}</td>
     <td>${has(d)?`<button class="rowpdf" data-pdf="${d}" aria-label="Save day ${d} as PDF">PDF</button>`:""}</td></tr>`;
   }
   $("tbody").innerHTML=rows;
@@ -1479,6 +1874,18 @@ function renderCharts(){
   const sk=[["fs","Fasting",css("--lav")],["ab","After breakfast",css("--pink")],["bd","Before dinner",css("--mint")],["ad","After dinner",css("--butter")]];
   upsert("s","sChart","line",{labels,datasets:sk.map(([k,l,c])=>({label:l,data:labels.map((_,i)=>{const e=E(i+1);return e?num(e[k]):null;}),borderColor:c,backgroundColor:c,pointRadius:4,borderWidth:2,tension:.3,spanGaps:true}))},
     {responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},plugins:{legend:{labels:{usePointStyle:true,boxWidth:8}},tooltip:{...tip,callbacks:{label:c=>c.raw===null?null:` ${c.dataset.label}: ${c.raw} ${unitLabel()}`}}},scales:{...baseScales,y:{grid:{color:grid},title:{display:true,text:unitLabel()}}}});
+
+  const lifeDays=allKeys().filter(k=>num(E(k).water)||num(E(k).sleep)!==null);
+  const lastL=Math.max(1,Math.min(D,Math.max(Math.min(todayDay(),D),...lifeDays,1)));
+  const ll=labels.slice(0,lastL);
+  upsert("l","lChart","bar",{labels:ll,datasets:[
+    {type:"bar",label:"Water (L)",data:ll.map((_,i)=>num((E(i+1)||{}).water)||null),backgroundColor:css("--water"),borderRadius:8,maxBarThickness:20,yAxisID:"y",order:3},
+    {type:"line",label:"Sleep (h)",data:ll.map((_,i)=>{const v=num((E(i+1)||{}).sleep);return v;}),borderColor:css("--lav"),backgroundColor:css("--lav"),pointRadius:4,borderWidth:2,tension:.3,spanGaps:true,yAxisID:"y1",order:1},
+    {type:"line",label:"Water target",data:ll.map(()=>waterGoal()),borderColor:css("--water"),borderDash:[6,6],borderWidth:1.5,pointRadius:0,yAxisID:"y",order:4},
+    {type:"line",label:"Sleep target",data:ll.map(()=>sleepGoal()),borderColor:css("--lav"),borderDash:[3,5],borderWidth:1.5,pointRadius:0,yAxisID:"y1",order:2}
+  ]},{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},plugins:{legend:{labels:{usePointStyle:true,boxWidth:8}},
+    tooltip:{...tip,callbacks:{title:titleCb,label:c=>c.raw===null?null:` ${c.dataset.label}: ${c.raw}`}}},
+    scales:{x:baseScales.x,y:{grid:{color:grid},beginAtZero:true,suggestedMax:waterGoal()+.5,title:{display:true,text:"liters"}},y1:{position:"right",grid:{display:false},beginAtZero:true,suggestedMax:sleepGoal()+2,title:{display:true,text:"hours"}}}});
 
   const ex=labels.map((_,i)=>exMin(E(i+1))||null);
   upsert("e","eChart","bar",{labels,datasets:[{label:"Minutes",data:ex,backgroundColor:ex.map(v=>v!==null&&v>=45?css("--mint"):css("--pink")),borderRadius:8,maxBarThickness:18}]},
@@ -1563,10 +1970,12 @@ function dayBlocks(d){
     <div class="rp-box"><b>${sv(e.ab)}</b><span>2h after breakfast</span></div>
     <div class="rp-box"><b>${sv(e.bd)}</b><span>Before dinner</span></div>
     <div class="rp-box"><b>${sv(e.ad)}</b><span>2h after dinner</span></div>
+    <div class="rp-box"><b>${num(e.water)?fmtL(e.water)+" L":"–"}</b><span>Water (target ${fmtL(waterGoal())} L)</span></div>
+    <div class="rp-box"><b>${num(e.sleep)!==null?fmtH(e.sleep):"–"}</b><span>Sleep (target ${fmtH(sleepGoal())})</span></div>
    </div>`});
   const foods=(e.foods||[]).slice().sort((a,b)=>MEALS.indexOf(a.meal)-MEALS.indexOf(b.meal));
   blocks.push({title:"Food",head:"<tr><th>Meal</th><th>Food</th><th>Qty</th><th>kcal</th></tr>",empty:"No food logged",
-    rows:foods.length?[...foods.map(f=>`<tr><td>${esc(f.meal)}</td><td>${esc(f.name)}</td><td>${esc(f.qty)}</td><td>${round(f.kcal)}</td></tr>`),`<tr class="tot"><td colspan="3">Total eaten</td><td>${round(ki)}</td></tr>`]:[]});
+    rows:foods.length?[...foods.map(f=>`<tr><td>${esc(f.meal)}</td><td>${esc(f.name)}</td><td>${esc(qtyText(f))}</td><td>${round(f.kcal)}</td></tr>`),`<tr class="tot"><td colspan="3">Total eaten</td><td>${round(ki)}</td></tr>`]:[]});
   const acts=e.acts&&e.acts.length?e.acts:(num(e.ex)?[{type:"Exercise",min:e.ex,kcal:ke}]:[]);
   blocks.push({title:"Exercise and activity",head:"<tr><th>Activity</th><th>Minutes</th><th>kcal burned</th></tr>",empty:"No exercise logged",
     rows:acts.length?[...acts.map(a=>`<tr><td>${esc(a.type)}</td><td>${esc(a.min)}</td><td>${round(a.kcal)}</td></tr>`),`<tr class="tot"><td>Total</td><td>${exMin(e)}</td><td>${round(ke)}</td></tr>`]:[]});
@@ -1592,7 +2001,7 @@ async function allPdf(){
     const e=E(d)||{};const w=num(e.w);let ch="";
     if(w!==null){const diff=w-prev;ch=Math.abs(diff)<.001?"=":diff<0?`▼ ${fmt(-diff)}`:`▲ ${fmt(diff)}`;prev=w;}
     if(!has(d)){rows.push(`<tr class="miss"><td>${d}</td><td>${fmtDate(dayDate(d))}</td><td colspan="7">Not logged</td></tr>`);continue;}
-    const foods=(e.foods||[]).map(f=>`${esc(f.name)}${num(f.qty)!==null&&+f.qty!==1?" ×"+esc(f.qty):""}`).join(", ");
+    const foods=(e.foods||[]).map(f=>`${esc(f.name)}${f.unit?" ("+esc(qtyText(f))+")":num(f.qty)!==null&&+f.qty!==1?" ×"+esc(f.qty):""}`).join(", ");
     const acts=(e.acts&&e.acts.length?e.acts.map(a=>`${esc(a.type)} ${esc(a.min)}m`):num(e.ex)?[`${esc(e.ex)} min`]:[]).join(", ");
     const ad=adherence(d),missed=doseSchedule(d).filter(x=>!(e.doses||{})[x.key]).map(x=>esc(x.r.name));
     const meds=[ad.due?`<b>${ad.taken}/${ad.due} taken</b>${missed.length?"<br>Missed: "+missed.join(", "):""}`:"",...(e.meds||[]).map(m=>`${esc(m.name)}${m.dose?" "+esc(m.dose):""}${m.taken?" ✓":""}`)].filter(Boolean).join("<br>");
@@ -1653,6 +2062,7 @@ function goDay(n){
 function fillSettings(){
   const s=S();$("sName").value=s.name;$("sStart").value=s.startWeight;$("sGoal").value=s.goalLoss;$("sDate").value=s.startDate;$("sDays").value=s.days;
   $("sHeight").value=s.heightCm||"";$("sUnit").value=s.unit;$("sMain").value=s.mainGoal??"";$("sP2").value=s.p2Days??150;$("sAge").value=s.age||"";$("sSex").value=s.sex||"f";$("sKcal").value=s.kcalGoal||"";
+  $("sWater").value=s.waterGoal??2.5;$("sSleep").value=s.sleepGoal??8;$("sNoMotiv").checked=!!s.noMotiv;
   settingsPreview();
 }
 function settingsPreview(){
@@ -1667,17 +2077,19 @@ function saveSettings(){
   if(m!==null&&m>=sw-g){toast("Main goal should be lower than the step 1 target");return;}
   state.settings={name:$("sName").value.trim()||DEFAULTS.name,startWeight:sw,goalLoss:g,startDate:$("sDate").value,days:Math.round(Math.min(Math.max(dy,7),120)),
     heightCm:$("sHeight").value,unit:$("sUnit").value,mainGoal:m??"",p2Days:Math.round(Math.min(Math.max(num($("sP2").value)||150,7),400)),
-    age:$("sAge").value,sex:$("sSex").value,kcalGoal:$("sKcal").value};
+    age:$("sAge").value,sex:$("sSex").value,kcalGoal:$("sKcal").value,
+    waterGoal:Math.min(Math.max(num($("sWater").value)||2.5,.5),6),sleepGoal:Math.min(Math.max(num($("sSleep").value)||8,4),12),noMotiv:$("sNoMotiv").checked};
+  rememberMotivPref();if(!state.settings.noMotiv){try{sessionStorage.removeItem("gu-motiv-x");}catch(e){}}
   selDay=clampDay(selDay);persistMain();
   Object.values(charts).forEach(c=>c.destroy());charts={};
   renderAll();toast("Settings saved ✨");
 }
 async function downloadCsv(){
   if(!downloads)return;
-  const head=["Day","Date","Weight (kg)","Fasting","2h After Breakfast","Before Dinner","2h After Dinner","Food","kcal eaten","Exercise","kcal burned","Exercise (min)","Medicine","Mood","Notes"];
+  const head=["Day","Date","Weight (kg)","Fasting","2h After Breakfast","Before Dinner","2h After Dinner","Food","kcal eaten","Exercise","kcal burned","Exercise (min)","Medicine","Water (L)","Sleep (h)","Mood","Notes"];
   const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
   const lines=[head.map(q).join(",")];
-  for(let d=1;d<=dayMax();d++){const e=E(d)||{};lines.push([d,fmtDate(dayDate(d)),e.w,e.fs,e.ab,e.bd,e.ad,(e.foods||[]).map(f=>`${f.meal}: ${f.name} x${f.qty}`).join("; "),kIn(e)||"",(e.acts||[]).map(a=>`${a.type} ${a.min}m`).join("; "),kEx(e,d)||"",exMin(e)||"",[adherence(d).due?`${adherence(d).taken}/${adherence(d).due} prescribed taken`:"",...(e.meds||[]).map(m=>`${m.name} ${m.dose}`)].filter(Boolean).join("; "),e.mood,e.note].map(q).join(","));}
+  for(let d=1;d<=dayMax();d++){const e=E(d)||{};lines.push([d,fmtDate(dayDate(d)),e.w,e.fs,e.ab,e.bd,e.ad,(e.foods||[]).map(f=>`${f.meal}: ${f.name} ${qtyText(f)}`).join("; "),kIn(e)||"",(e.acts||[]).map(a=>`${a.type} ${a.min}m`).join("; "),kEx(e,d)||"",exMin(e)||"",[adherence(d).due?`${adherence(d).taken}/${adherence(d).due} prescribed taken`:"",...(e.meds||[]).map(m=>`${m.name} ${m.dose}`)].filter(Boolean).join("; "),e.water,e.sleep,e.mood,e.note].map(q).join(","));}
   try{await downloads.save({filename:"riju-health-chart.csv",data:"\ufeff"+lines.join("\n")});}catch(e){toast("Download was cancelled");}
 }
 
@@ -1791,32 +2203,66 @@ $("rxBody").addEventListener("click",ev=>{
   if(s){const r=state.regimen.find(q=>q.id===s.dataset.rxstop);if(r&&confirm(`Stop ${r.name} from today? Its past ticks stay saved.`)){r.end=isoDate(new Date());persistMain();renderAll();toast(`${r.name} stopped`);}}
   if(x){const r=state.regimen.find(q=>q.id===x.dataset.rxdel);if(r&&confirm(`Delete ${r.name} completely? Use Stop instead to keep it in your history.`)){state.regimen=state.regimen.filter(q=>q.id!==r.id);persistMain();renderAll();toast(`${r.name} deleted`);}}
 });
-$("foodList").innerHTML=FOODS.map(f=>`<option value="${esc(f[0])}">${esc(f[1])}, ${f[2]} kcal</option>`).join("");
 $("prevDay").onclick=()=>goDay(selDay-1);
 $("nextDay").onclick=()=>goDay(selDay+1);
 $("tabs").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;tab=b.dataset.tab;renderTabs();});
 $("moods").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;draft.mood=draft.mood===b.dataset.m?"":b.dataset.m;renderMoods();markDirty();});
-["fW","fFS","fAB","fBD","fAD","fN"].forEach(id=>$(id).addEventListener("input",()=>{
+["fW","fFS","fAB","fBD","fAD","fN","fWater","fSleep"].forEach(id=>$(id).addEventListener("input",()=>{
   readHealthInputs();markDirty();
+  if(id==="fWater"||id==="fSleep"){renderLife();renderTabs();return;}
   if(id==="fW"){weightHint();let ch=false;draft.acts.forEach(a=>{if(!a.m){a.kcal=actKcal(a);ch=true;}});if(ch)renderActRows();}
   renderKcal();if(id!=="fN"&&id!=="fW")renderIdeas();
 }));
 
-// food rows
-document.querySelectorAll("[data-addfood]").forEach(b=>b.onclick=()=>{draft.foods.push({meal:b.dataset.addfood,name:"",qty:1,kcal:""});renderFoodRows();renderTabs();markDirty();const r=$("foodRows").querySelectorAll(".f-name");r[r.length-1].focus();});
+// food rows (v2: meal sections + picker)
+$("foodRows").addEventListener("click",ev=>{
+  const mealEl=ev.target.closest(".meal");if(!mealEl)return;const meal=mealEl.dataset.meal;
+  const t=ev.target.closest("[data-toggle],[data-add],[data-pk],[data-ck],[data-pick],[data-delcustom],[data-del]");if(!t)return;
+  if(t.matches("[data-toggle]")){if(openMeals.has(meal)||openFor===meal){openMeals.delete(meal);if(openFor===meal)openFor=null;}else openMeals.add(meal);renderFoodRows();return;}
+  if(t.matches("[data-add]")){openPicker(meal);return;}
+  if(t.matches("[data-pk]")){
+    if(t.dataset.pk==="close"){openFor=null;renderFoodRows();return;}
+    if(t.dataset.pk==="custom"){pickCustom=true;renderFoodRows();const el=$(pickQ.trim()?"ckKcal":"ckName");if(el)el.focus({preventScroll:true});return;}
+  }
+  if(t.matches("[data-ck]")){
+    if(t.dataset.ck==="back"){pickQ=$("ckName").value;pickCustom=false;renderFoodRows();const q=$("foodRows").querySelector(".pk-q");if(q)q.focus({preventScroll:true});return;}
+    const name=$("ckName").value.trim().replace(/\s+/g," "),qty=num($("ckQty").value)||1,unit=$("ckUnit").value,kc=num($("ckKcal").value);
+    if(!name){toast("Write the food name first");$("ckName").focus();return;}
+    if(kc===null){toast("Write about how many kcal it has");$("ckKcal").focus();return;}
+    const save=$("ckSave").checked;
+    if(save){state.custom=(state.custom||[]).filter(c=>String(c.n).toLowerCase()!==name.toLowerCase());state.custom.push({n:name,u:`${qty} ${unit}`,k:round(kc)});persistMain();}
+    const f={meal:openFor,name,qty,unit,kcal:round(kc)};if(!save)f.m=1;
+    addFoodToMeal(f);toast(save?`⭐ ${name} added and saved to your foods`:`${name} added`);return;
+  }
+  if(t.matches("[data-pick]")){const hit=findFood(t.dataset.pick);if(!hit)return;addFoodToMeal(mkFood(openFor,hit[0],1));return;}
+  if(t.matches("[data-delcustom]")){
+    const n=t.dataset.delcustom;if(!confirm(`Remove “${n}” from your own food list? Days already logged keep it.`))return;
+    state.custom=(state.custom||[]).filter(c=>String(c.n).toLowerCase()!==n.toLowerCase());persistMain();$("pkList").innerHTML=pickListHtml();toast("Removed from your foods");return;
+  }
+  if(t.matches("[data-del]")){const row=t.closest(".fitem");draft.foods.splice(+row.dataset.i,1);renderFoodRows();renderTabs();markDirty();renderIdeas();}
+});
 $("foodRows").addEventListener("input",ev=>{
-  const row=ev.target.closest(".row");if(!row)return;const k=ev.target.dataset.k;if(k==="meal")return;const f=draft.foods[+row.dataset.i];
+  if(ev.target.classList.contains("pk-q")){pickQ=ev.target.value;$("pkList").innerHTML=pickListHtml();$("pkCustom").innerHTML=pickCustomLabel();return;}
+  const row=ev.target.closest(".fitem");if(!row)return;const k=ev.target.dataset.k;if(!k||k==="unit")return;const f=draft.foods[+row.dataset.i];
   f[k]=ev.target.value;
   if(k==="kcal")f.m=1;
-  if(k==="name"||k==="qty"){
-    const hit=FOOD_MAP.get(String(f.name||"").trim().toLowerCase());
-    if(hit&&(k==="name"||!f.m)){f.m=0;f.kcal=round(hit[2]*(num(f.qty)??1));row.querySelector('[data-k="kcal"]').value=f.kcal;}
-    row.querySelector(".unit").textContent=foodUnit(f.name);
-  }
+  if(k==="qty"&&!f.m){const a=autoKcal(f);if(a!==null){f.kcal=a;row.querySelector('[data-k="kcal"]').value=a;}}
   markDirty();updateFoodSum();renderIdeas();
 });
-$("foodRows").addEventListener("change",ev=>{if(ev.target.dataset.k==="meal"){draft.foods[+ev.target.closest(".row").dataset.i].meal=ev.target.value;markDirty();updateFoodSum();}});
-$("foodRows").addEventListener("click",ev=>{const b=ev.target.closest("[data-del]");if(!b)return;draft.foods.splice(+b.closest(".row").dataset.i,1);renderFoodRows();renderTabs();markDirty();renderIdeas();});
+$("foodRows").addEventListener("change",ev=>{
+  if(ev.target.dataset.k!=="unit")return;const row=ev.target.closest(".fitem");const f=draft.foods[+row.dataset.i];
+  f.unit=ev.target.value;const a=autoKcal(f);if(a!==null){f.m=0;f.kcal=a;row.querySelector('[data-k="kcal"]').value=a;}else f.m=1;
+  row.querySelector(".f-info small").textContent=subText(f);markDirty();updateFoodSum();renderIdeas();
+});
+$("foodRows").addEventListener("keydown",ev=>{
+  if(ev.key==="Enter"&&ev.target.classList.contains("pk-q")){ev.preventDefault();const b=$("pkList").querySelector("[data-pick]");if(b)b.click();else $("pkCustom").click();}
+  if(ev.key==="Escape"&&openFor){openFor=null;renderFoodRows();}
+});
+// water & sleep
+document.querySelectorAll("[data-wadd]").forEach(b=>b.onclick=()=>addWater(+b.dataset.wadd,false));
+document.querySelectorAll("[data-hwadd]").forEach(b=>b.onclick=()=>addWater(+b.dataset.hwadd,true));
+document.querySelectorAll("[data-sadd]").forEach(b=>b.onclick=()=>addSleep(+b.dataset.sadd));
+$("motivX").onclick=()=>{try{sessionStorage.setItem("gu-motiv-x","1");}catch(e){}$("motiv").hidden=true;};
 // activity rows
 $("addAct").onclick=()=>{const a={type:"Brisk walking",min:30,kcal:0};a.kcal=actKcal(a);draft.acts.push(a);renderActRows();renderTabs();markDirty();};
 function actChanged(ev){
@@ -1927,21 +2373,29 @@ function applyUpdate(){
   wantReload=true;$("upd").hidden=true;
   if(swReg&&swReg.waiting)setTimeout(()=>swReg.waiting&&swReg.waiting.postMessage({type:"SKIP_WAITING"}),300);else location.reload();
 }
+function showUpd(){$("upd").hidden=false;try{if(swReg&&swReg.waiting)swReg.waiting.postMessage({type:"VERSION",ask:"new"});}catch(e){}}
+function notifUI(){const b=$("notifBtn");if(!("Notification" in window)||!("serviceWorker" in navigator)){b.hidden=true;return;}b.hidden=false;
+  const p=Notification.permission;b.textContent=p==="granted"?"🔔 Update alerts are on":p==="denied"?"🔕 Alerts blocked (allow in phone settings)":"🔔 Turn on update alerts";b.disabled=p!=="default";}
+$("notifBtn").onclick=async()=>{try{const p=await Notification.requestPermission();notifUI();
+  if(p==="granted"){toast("🔔 You'll get a phone alert when a new version is ready");if(swReg)swReg.showNotification("🔔 Update alerts are on",{body:"Glow Up will tell you here when a new version is ready.",icon:"./icons/icon-192.png",tag:"glowup-test"});}}catch(e){toast("This phone can't show alerts");}};
+notifUI();
 $("updNow").onclick=applyUpdate;$("updLater").onclick=()=>{$("upd").hidden=true;};
 $("updBtn").onclick=async()=>{
   if(!swReg){location.reload();return;}
   toast("Checking for update…");
   try{await swReg.update();}catch(e){toast("Couldn't check. Are you online?");return;}
-  setTimeout(()=>{if(swReg.waiting)$("upd").hidden=false;else if(swReg.installing)toast("Downloading the update…");else toast("You have the latest version ✨");},800);
+  setTimeout(()=>{if(swReg.waiting)showUpd();else if(swReg.installing)toast("Downloading the update…");else toast("You have the latest version ✨");},800);
 };
 if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)){
   navigator.serviceWorker.addEventListener("controllerchange",()=>{if(wantReload)location.reload();});
-  navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.type==="VERSION"){appVersion=e.data.version;appInfo();}});
+  navigator.serviceWorker.addEventListener("message",e=>{if(!e.data||e.data.type!=="VERSION")return;
+    if(e.data.ask==="new"){$("updText").textContent=`✨ Version ${e.data.version} is ready`;return;}
+    if(swReg&&swReg.waiting&&e.source===swReg.waiting)return;appVersion=e.data.version;appInfo();});
   window.addEventListener("load",async()=>{
     try{
       swReg=await navigator.serviceWorker.register("./sw.js");
-      if(swReg.waiting&&navigator.serviceWorker.controller)$("upd").hidden=false;
-      swReg.addEventListener("updatefound",()=>{const w=swReg.installing;if(w)w.addEventListener("statechange",()=>{if(w.state==="installed"&&navigator.serviceWorker.controller)$("upd").hidden=false;});});
+      if(swReg.waiting&&navigator.serviceWorker.controller)showUpd();
+      swReg.addEventListener("updatefound",()=>{const w=swReg.installing;if(w)w.addEventListener("statechange",()=>{if(w.state==="installed"&&navigator.serviceWorker.controller)showUpd();});});
       document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")swReg.update().catch(()=>{});});
       const r=await navigator.serviceWorker.ready;if(r.active)r.active.postMessage({type:"VERSION"});
     }catch(e){}

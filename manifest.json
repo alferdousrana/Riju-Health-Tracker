@@ -1,7 +1,7 @@
 {
   "name": "Riju's Glow Up",
   "short_name": "Glow Up",
-  "description": "Weight, blood sugar, food, exercise and medicine tracker",
+  "description": "Weight, blood sugar, food, water, sleep, exercise and medicine tracker",
   "id": "./",
   "start_url": "./#home",
   "scope": "./",
